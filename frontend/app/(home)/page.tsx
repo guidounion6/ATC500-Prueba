@@ -12,7 +12,7 @@ export default function Home() {
           <Image 
           src={heroImage} 
           alt="Una cancha de futbol" 
-          layout="fill"
+          fill
           quality={100}
           className="opacity-75 cover fill"
           />

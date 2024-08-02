@@ -13,7 +13,7 @@ const HomeLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
             <NavBar />
             <div className="flex">
                 <section className="flex min-h-screen flex-1 flex-col max-md:pb-14">
-                    <div className="w-full ">
+                    <div className="w-full">
                         {children}
                     </div>
                 </section>
