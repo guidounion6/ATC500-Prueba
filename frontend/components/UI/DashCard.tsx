@@ -1,13 +1,14 @@
+"use client"
 import React from 'react'
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
 import Image, { StaticImageData } from 'next/image'
 
 interface HomeCardProps {
     image: StaticImageData,
     size: number,
     title: string,
-    path: string,
-    onClick: () => void
+    path?: string,
+    onClick?: () => void
 }
 
 const DashCard = ({ image, size, title, path, onClick }: HomeCardProps) => {
@@ -17,12 +18,11 @@ const DashCard = ({ image, size, title, path, onClick }: HomeCardProps) => {
     }
     return (
         <div
-            className={`relative cursor-pointer overflow-hidden shadow-lg rounded-lg col-span-${size}`}
+            className={`relative cursor-pointer overflow-hidden shadow-lg rounded-lg col-span-${size} shadow-[#040c16]`}
             onClick={path ? () => navigateTo(path) : onClick}
         >
             <Image
                 src={image}
-                fill
                 alt="card-img"
                 className='w-full h-full object-cover'
             />
