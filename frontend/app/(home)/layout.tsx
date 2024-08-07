@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 const HomeLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
     return (
-        <main className="relative">
+        <main className="relative bg-gray-200">
             <NavBar />
             <div className="flex">
                 <section className="flex min-h-screen flex-1 flex-col max-md:pb-14">

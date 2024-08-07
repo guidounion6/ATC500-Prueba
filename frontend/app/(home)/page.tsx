@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import heroImage from "../../public/image/Fondo1.jpg"
+import heroImage from "../../public/image/Fondo3.jpg"
 
 
 

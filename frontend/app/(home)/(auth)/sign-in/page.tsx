@@ -18,7 +18,7 @@ const SignInPage = () => {
 
     const router = useRouter()
     return (
-        <section className='min-h-screen flex flex-col flex-between bg-gray-200'>
+        <section className='min-h-screen flex flex-col flex-center bg-gray-200'>
             <div className='max-w-sm w-full p-6 bg-graybg rounded-lg shadow-md mt-10'>
                 <h1 className='text-2xl text-primary mb-6'>Ingresa</h1>
                 <div>
@@ -83,7 +83,7 @@ const SignInPage = () => {
                                     className='w-full bg-primary text-white mt-2 py-2 px-4 rounded-md hover:bg-accent focust:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus_ring-offset-gray-100'
                                     disabled={isSubmitting}
                                 >
-                                    {isSubmitting ? "Cargando..." : "Registrate"}
+                                    {isSubmitting ? "Cargando..." : "Iniciar Sesion"}
                                 </button>
                                 <div className='p-6'>
                                     <div className='flex flex-center'>

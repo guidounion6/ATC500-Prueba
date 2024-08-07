@@ -1,5 +1,6 @@
 "use client"
 import Footer from '@/components/Footer'
+import DashCard from '@/components/UI/DashCard';
 import axios from 'axios';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import Image from 'next/image';
@@ -7,6 +8,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React from 'react'
 import * as Yup from "yup";
+import juega from "../../../../public/image/Juega.jpg"
 
 const signupSchema = Yup.object().shape({
   name: Yup.string()
