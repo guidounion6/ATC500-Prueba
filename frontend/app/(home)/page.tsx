@@ -10,7 +10,7 @@ export default function Home() {
       <div className='w-full h-full min-h-[720px]'>
         <section className="relative w-full h-full">
           <Image 
-          src={heroImage} 
+          src=""
           alt="Una cancha de futbol" 
           fill
           quality={100}
