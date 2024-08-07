@@ -8,7 +8,7 @@ const NavBar = () => {
         <header className="bg-white text-black w-full">
             <nav className="container mx-auto flex flex-between p-5">
                 <Image
-                    src={ATCLogo}
+                    src=""
                     alt="el logo de la pagina dice ATC"
                     width={100}
                     height={100}
