@@ -8,13 +8,13 @@ const metadata: Metadata = {
 
 const DashboardLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
     return (
-        <main className="bg-gray-200">
-            <div className="flex">
-                <section className="flex min-h-screen flex-1 flex-col max-md:pb-14 ">
-                  {children}
-                </section>
-            </div>
-        </main>
+            <main className="bg-gray-200">
+                <div className="flex">
+                    <section className="flex min-h-screen flex-1 flex-col max-md:pb-14 ">
+                        {children}
+                    </section>
+                </div>
+            </main>
     )
 }
 

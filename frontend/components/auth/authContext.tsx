@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     useEffect(()=> {
        const initializeAuth = async () => {
         const validToken = await checkTokenExpiration(); 
+        console.log(validToken)
         setIsAuthenticated(validToken)
        }
 

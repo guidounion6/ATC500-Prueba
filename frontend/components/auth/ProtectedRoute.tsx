@@ -22,7 +22,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
       }, [isAuthenticated, logout, router]);
     
       if (!isAuthenticated) {
-        return null; // O mostrar un indicador de carga
+        return null; 
       }
     
       return <>{children}</>;

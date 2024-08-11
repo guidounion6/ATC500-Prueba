@@ -19,7 +19,9 @@ export default function Home() {
           <div className="absolute top-0 left-0 right-0 bottom-0 flex flex-col flex-center text-center text-white p-10 bg-black bg-opacity-50">
             <h2 className="text-4xl font-bold mb-3">Crea equipos con los mejores</h2>
             <p className="text-xl mb-5">Compite con tus amigos por ver quien es el mejor manager</p>
-            <button className="bg-primary hover:bg-accent text-white font-bold py-2 px-4 rounded">Comienza ya!</button>
+            <button className="bg-primary hover:bg-accent text-white font-bold py-2 px-4 rounded"
+            
+            >Comienza ya!</button>
           </div>
         </section>
 

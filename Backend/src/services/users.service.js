@@ -1,6 +1,7 @@
 const { models } = require("../libs/sequelize");
-const bcrypt = require("bcryptjs")
+const bcrypt = require("bcryptjs");
 const { v4: uuidv4 } = require("uuid");
+
 
 class UsersService {
     constructor() { }
@@ -19,14 +20,15 @@ class UsersService {
                     password: hashedPassword,
                 })
                 return user
-            }
+            } 
         } catch (error) {
             return error
         }
     }
+   
     async findByEmail(email) {
-        return await models.User.findOne({ where: email })
-    }
+        return await models.User.findOne({ where: { email } });
+      }
 }
 
 module.exports = UsersService; 

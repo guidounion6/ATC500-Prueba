@@ -1,5 +1,5 @@
 "use client"
-import axios from 'axios'
+import axios from "../../../axios_config/axios.config"
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -27,11 +27,12 @@ const SignInPage = () => {
                         validationSchema={singinSchema}
                         onSubmit={async (values, { setSubmitting }) => {
                             try {
-                                const response = await axios.post("users/register", values)
+                                console.log(values)
+                                const response = await axios.post("users/login", values)
                                 localStorage.setItem("token", response.data.token)
-                                router.push("/")
+                                router.push("/dashboard")
                             } catch (error) {
-                                console.log("Error registering...try againt", error)
+                                console.log("Error loging in...try again", error)
                             } finally {
                                 setSubmitting(false)
                             }
@@ -51,7 +52,7 @@ const SignInPage = () => {
                                         type="email"
                                         id="email"
                                         name="email"
-                                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm bg-white border-2 py-2 px-3"
+                                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm bg-white border-2 py-2 px-3 text-black"
                                     />
                                     <ErrorMessage
                                         name="email"
@@ -69,8 +70,8 @@ const SignInPage = () => {
                                     <Field
                                         type="password"
                                         id="password"
-                                        name="passwprd"
-                                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm bg-white border-2 py-2 px-3"
+                                        name="password"
+                                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm bg-white border-2 py-2 px-3 text-black"
                                     />
                                     <ErrorMessage
                                         name="password"

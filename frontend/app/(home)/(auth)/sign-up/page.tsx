@@ -1,7 +1,7 @@
 "use client"
 import Footer from '@/components/Footer'
 import DashCard from '@/components/UI/DashCard';
-import axios from 'axios';
+import axios from '../../../axios_config/axios.config';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -37,7 +37,9 @@ const SingUpPage = () => {
             try {
               const response = await axios.post("users/register", values)
               localStorage.setItem("token", response.data.token)
-              router.push("/")
+              console.log("token", response.data)
+              console.log("response", response)
+              router.push("/dashboard")
             } catch (error) {
               console.log("Error registering...try againt", error)
             } finally {
@@ -59,7 +61,7 @@ const SingUpPage = () => {
                   type="text"
                   id="name"
                   name="name"
-                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm bg-white border-2 py-2 px-3"
+                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm bg-white border-2 py-2 px-3 text-black"
                 />
                 <ErrorMessage
                   name="name"
@@ -78,7 +80,7 @@ const SingUpPage = () => {
                   type="email"
                   id="email"
                   name="email"
-                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm bg-white border-2 py-2 px-3"
+                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm bg-white border-2 py-2 px-3 text-black"
                 />
                 <ErrorMessage
                   name="email"
@@ -96,8 +98,8 @@ const SingUpPage = () => {
                 <Field
                   type="password"
                   id="password"
-                  name="passwprd"
-                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm bg-white border-2 py-2 px-3"
+                  name="password"
+                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm bg-white border-2 py-2 px-3 text-black"
                 />
                 <ErrorMessage
                   name="password"
