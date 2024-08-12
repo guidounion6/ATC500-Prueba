@@ -5,7 +5,6 @@ const API_URL = "http://localhost:3001/api/v1";
 
 export const refreshToken = async () => {
   const refreshToken = localStorage.getItem("refreshToken");
-
   try {
     const response = await axios.post(`${API_URL}/users/refresh-token`, {
       refreshToken,
@@ -25,14 +24,11 @@ export const refreshToken = async () => {
 
 export const checkTokenExpiration = async () => {
   const token = localStorage.getItem("token");
-  console.log(token)
-
   if (!token) {
     return false;
   }
 
   const decoded = jwtDecode(token);
-  console.log(decoded)
 
   if (!decoded.exp || decoded.exp * 1000 < Date.now()) {
     return false;

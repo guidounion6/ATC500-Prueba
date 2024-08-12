@@ -23,13 +23,15 @@ const SignInPage = () => {
                 <h1 className='text-2xl text-primary mb-6'>Ingresa</h1>
                 <div>
                     <Formik
-                        initialValues={{ name: "", email: "", password: "" }}
+                        initialValues={{ email: "", password: "" }}
                         validationSchema={singinSchema}
                         onSubmit={async (values, { setSubmitting }) => {
                             try {
-                                console.log(values)
                                 const response = await axios.post("users/login", values)
-                                localStorage.setItem("token", response.data.token)
+                                const { accessToken, refreshToken } = response.data;
+                                localStorage.setItem("token", accessToken);
+                                localStorage.setItem("refreshToken", refreshToken);
+                                console.log(response.data.token)
                                 router.push("/dashboard")
                             } catch (error) {
                                 console.log("Error loging in...try again", error)

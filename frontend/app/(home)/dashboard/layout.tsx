@@ -1,3 +1,5 @@
+
+
 import type { Metadata } from "next"
 import React from "react"
 
@@ -15,6 +17,7 @@ const DashboardLayout = ({ children }: Readonly<{ children: React.ReactNode }>) 
                     </section>
                 </div>
             </main>
+
     )
 }
 

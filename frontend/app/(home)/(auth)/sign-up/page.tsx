@@ -35,18 +35,14 @@ const SingUpPage = () => {
           validationSchema={signupSchema}
           onSubmit={async (values, { setSubmitting }) => {
             try {
-              const response = await axios.post("users/register", values)
-              localStorage.setItem("token", response.data.token)
-              console.log("token", response.data)
-              console.log("response", response)
-              router.push("/dashboard")
+              await axios.post("users/register", values)
+              router.push("/login");
             } catch (error) {
-              console.log("Error registering...try againt", error)
+              console.error("Error al registrarse:", error);
             } finally {
-              setSubmitting(false)
+              setSubmitting(false);
             }
-          }
-          }
+          }}
         >
           {({ isSubmitting }) => (
             <Form>

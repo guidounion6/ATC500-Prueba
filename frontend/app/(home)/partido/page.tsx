@@ -7,24 +7,23 @@ import PlayerCard from '@/components/UI/PlayerCard'
 import Team from '@/components/UI/Team'
 import ProtectedRoute from '@/components/auth/ProtectedRoute'
 
-
-
 const MatchPage = () => {
-    const [search, setSearch] = useState("")
-    const [players, setPlayers] = useState<any[]>([]) // Inicializa como arreglo vacío
-    const [loading, setLoading] = useState(false)
-    const [selectedPlayer, setSelectedPlayer] = useState<any>(null)
+    const [search, setSearch] = useState("");
+    const [players, setPlayers] = useState<any[]>([]);
+    const [loading, setLoading] = useState(false);
+    const [selectedPlayer, setSelectedPlayer] = useState<any>(null);
+    const [team1, setTeam1] = useState<any[]>([]);
+    const [team2, setTeam2] = useState<any[]>([]);
 
     const fetchPlayers = async () => {
         if (search.trim() === "") {
-            setPlayers([])
-            return
+            setPlayers([]);
+            return;
         }
 
-        setLoading(true)
+        setLoading(true);
         try {
-            const response = await axios.get(`https://apiv3.apifootball.com/?action=get_players&player_name=${search}&APIkey=63ce66cf2b1e3bcf8d1e0345d584100875605c2f7ef8b77f4c2c2018b4de6786`)
-
+            const response = await axios.get(`https://apiv3.apifootball.com/?action=get_players&player_name=${search}&APIkey=63ce66cf2b1e3bcf8d1e0345d584100875605c2f7ef8b77f4c2c2018b4de6786`);
 
             if (Array.isArray(response.data)) {
                 const filteredPlayers = response.data.map(({ player_id, player_name, team_name, player_image }: any) => ({
@@ -61,6 +60,23 @@ const MatchPage = () => {
         const player = players.find((p) => p.player_id === playerId)
         setSelectedPlayer(player)
     }
+
+    const handleSavePlayer = (player: any) => {
+        if (team1.some(p => p.player_id === player.player_id) || team2.some(p => p.player_id === player.player_id)) {
+            alert('El jugador ya está en uno de los equipos.');
+            return;
+        }
+        if (team1.length < 5) {
+            setTeam1([...team1, player]);
+        } else if (team2.length < 5) {
+            setTeam2([...team2, player]);
+        } else {
+            alert('Ambos equipos están completos.');
+        }
+
+        setSelectedPlayer(null); 
+    }
+
     return (
         <ProtectedRoute>
             <section className='flex flex-col sm:flex-row flex-between w-full p-4'>
@@ -83,38 +99,42 @@ const MatchPage = () => {
                                     className="bg-transparent text-black mt-1 block border-gray-700 rounded-md focus:ring-primary focus:border-primary sm:text-sm border-2 py-2 px-3 w-full"
                                 />
                             </div>
-
                             {loading ? (
                                 <p>Cargando...</p>
                             ) : (
-                                <select onChange={handlePlayerSelect} className='bg-transparent text-black mt-1 block border-gray-700 rounded-md focus:ring-primary focus:border-primary sm:text-sm border-2 py-2 px-3'>
-                                    <option value="">Selecciona un jugador</option>
-                                    {players.map((player, index) => (
-                                        <option key={`${player.player_id}-${index}`} value={player.player_id}>
-                                            {player.player_name}
+                                <select onChange={handlePlayerSelect} className='bg-transparent text-black mt-1 block border-gray-700 rounded-md focus:ring-primary focus:border-primary sm:text-sm border-2 py-2 px-3 w-full'>
+                                    <option value=''>Seleccionar Jugador</option>
+                                    {players.map((player) => (
+                                        <option key={player.player_id} value={player.player_id}>
+                                            {player.player_name} - {player.team_name}
                                         </option>
                                     ))}
                                 </select>
                             )}
+
                             {selectedPlayer && (
                                 <PlayerCard
+                                    player_id={selectedPlayer.player_id}
                                     image={selectedPlayer.player_image}
                                     name={selectedPlayer.player_name}
-                                    team={selectedPlayer.team_name}
+                                    team_name={selectedPlayer.team_name}
+                                    onSavePlayer={handleSavePlayer}
                                 />
                             )}
-
                         </div>
-                        <div className="relative w-full h-full mt-4 md:mt-0">
-                            <div className='absolute top-0 left-0 w-full h-full flex justify-around items-center z-10 p-4'>
-                                <Team />
-                                <Team />
-                            </div>
+
+                        <div className='relative w-full md:w-[60vw] mx-2'>
                             <Image
                                 src={field}
-                                alt="la cancha donde vamos a acomodar a los jugadores"
-                                className='w-full h-48 md:h-[100vh] object-cover rounded-lg'
+                                width={500}
+                                height={500}
+                                alt='Imagen de fondo'
+                                className='w-full object-contain opacity-75'
                             />
+                            <div className='absolute inset-0 flex flex-col md:flex-row justify-between p-4 text-black'>
+                                <Team teamName='Equipo 1' teamPlayers={team1} onAddPlayer={handleSavePlayer} />
+                                <Team teamName='Equipo 2' teamPlayers={team2} onAddPlayer={handleSavePlayer} />
+                            </div>
                         </div>
                     </section>
                 </div>

@@ -1,5 +1,5 @@
 const initModels = (sequelize) => {
-    const { User } = sequelize.models
+    const { User, Player } = sequelize.models
 }
 
 module.exports = initModels

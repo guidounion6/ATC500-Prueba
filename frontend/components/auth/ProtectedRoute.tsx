@@ -4,6 +4,7 @@ import { useAuth } from './authContext';
 import { useRouter } from 'next/navigation';
 import { checkTokenExpiration } from './auth';
 
+
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 
     const { isAuthenticated, logout } = useAuth();
