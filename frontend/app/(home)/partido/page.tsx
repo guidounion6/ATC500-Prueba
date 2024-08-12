@@ -6,6 +6,7 @@ import field from "../../../public/image/Fondo1.jpg"
 import PlayerCard from '@/components/UI/PlayerCard'
 import Team from '@/components/UI/Team'
 import ProtectedRoute from '@/components/auth/ProtectedRoute'
+import Swal from "sweetalert2"
 
 const MatchPage = () => {
     const [search, setSearch] = useState("");
@@ -63,19 +64,32 @@ const MatchPage = () => {
 
     const handleSavePlayer = (player: any) => {
         if (team1.some(p => p.player_id === player.player_id) || team2.some(p => p.player_id === player.player_id)) {
-            alert('El jugador ya está en uno de los equipos.');
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'El jugador ya está en uno de los equipos.',
+            });
             return;
         }
+    
         if (team1.length < 5) {
             setTeam1([...team1, player]);
         } else if (team2.length < 5) {
             setTeam2([...team2, player]);
         } else {
-            alert('Ambos equipos están completos.');
+            Swal.fire({
+                icon: 'warning',
+                title: 'Atención',
+                text: 'Ambos equipos están completos.',
+            });
         }
-
+    
         setSelectedPlayer(null); 
     }
+    const handleRemovePlayer = (player_id: number) => {
+        setTeam1(team1.filter(player => player.player_id !== player_id));
+        setTeam2(team2.filter(player => player.player_id !== player_id));
+    };
 
     return (
         <ProtectedRoute>
@@ -129,11 +143,11 @@ const MatchPage = () => {
                                 width={500}
                                 height={500}
                                 alt='Imagen de fondo'
-                                className='w-full object-contain opacity-75'
+                                className='w-full object-contain opacity-25'
                             />
                             <div className='absolute inset-0 flex flex-col md:flex-row justify-between p-4 text-black'>
-                                <Team teamName='Equipo 1' teamPlayers={team1} onAddPlayer={handleSavePlayer} />
-                                <Team teamName='Equipo 2' teamPlayers={team2} onAddPlayer={handleSavePlayer} />
+                                <Team teamName='Equipo 1' teamPlayers={team1} onRemovePlayer={handleRemovePlayer} />
+                                <Team teamName='Equipo 2' teamPlayers={team2} onRemovePlayer={handleRemovePlayer} />
                             </div>
                         </div>
                     </section>
